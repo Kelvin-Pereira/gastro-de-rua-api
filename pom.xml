@@ -27,6 +27,7 @@
                 <module>infrastructure</module>
                 <module>application</module>
                 <module>usecase</module>
+                <module>arquitetura</module>
             </modules>
         </profile>
     </profiles>
