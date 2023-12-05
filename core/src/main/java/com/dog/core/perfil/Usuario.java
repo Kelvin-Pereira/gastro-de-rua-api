@@ -1,6 +1,6 @@
 package com.dog.core.perfil;
 
-import com.dog.arquitetura.brasil.Cpf;
+import com.dog.arquitetura.brasil.Email;
 
-public record Usuario(Cpf cpf, String nome) {
+public record Usuario(String name, Email email) {
 }
