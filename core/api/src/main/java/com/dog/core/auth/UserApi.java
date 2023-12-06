@@ -4,13 +4,14 @@ import com.dog.arquitetura.brasil.Email;
 import com.dog.arquitetura.brasil.Telefone;
 
 import java.time.LocalDate;
+import java.util.Optional;
 
 public interface UserApi {
 
-    TokenUser register(User user);
+    Optional<TokenUser> register(Usuario user);
 
 
-    record User(String name,
+    record Usuario(String name,
                 Email email,
                 LocalDate birthDate,
                 Telefone telefone,

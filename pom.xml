@@ -24,10 +24,8 @@
             <id>modules</id>
             <modules>
                 <module>core</module>
-                <module>infrastructure</module>
-                <module>application</module>
-                <module>usecase</module>
                 <module>arquitetura</module>
+                <module>web-bff</module>
             </modules>
         </profile>
     </profiles>
