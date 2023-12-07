@@ -10,13 +10,9 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class Token {
+public class TokenResponse {
 
-  private Long id;
-  private String token;
-  private TokenType tokenType;
-  private boolean revoked;
-  private boolean expired;
-  private User user;
+  private String accessToken;
+  private TokenType refreshToken;
 
 }

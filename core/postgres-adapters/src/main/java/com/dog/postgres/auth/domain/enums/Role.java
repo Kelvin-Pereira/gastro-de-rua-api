@@ -1,4 +1,4 @@
-package com.dog.core.auth.domain.enums;
+package com.dog.postgres.auth.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import static com.dog.core.auth.domain.enums.Permission.*;
+import static com.dog.postgres.auth.domain.enums.Permission.*;
 
 
 @Getter

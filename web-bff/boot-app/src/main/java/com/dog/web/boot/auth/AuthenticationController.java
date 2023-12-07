@@ -1,7 +1,7 @@
 package com.dog.web.boot.auth;
 
+import com.dog.core.auth.domain.entity.TokenResponse;
 import com.dog.web.auth.UcRegistrarUsuario;
-import com.dog.web.type.auth.TokenType;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +21,7 @@ public class AuthenticationController {
     private final UcRegistrarUsuario ucRegistrarUsuario;
 
     @PostMapping("/registrar")
-    public ResponseEntity<TokenType> register(@RequestBody @Valid UcRegistrarUsuario.Input request) {
+    public ResponseEntity<TokenResponse> register(@RequestBody @Valid UcRegistrarUsuario.Input request) {
         return ResponseEntity.ok(ucRegistrarUsuario.apply(request));
     }
 

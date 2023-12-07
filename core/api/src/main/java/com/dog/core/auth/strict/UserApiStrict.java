@@ -1,26 +1,21 @@
 package com.dog.core.auth.strict;
 
-import com.dog.core.auth.TokenUser;
 import com.dog.core.auth.UserApi;
 import com.dog.core.auth.domain.entity.User;
+import com.dog.core.auth.domain.entity.UserRequest;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Optional;
-
 @RequiredArgsConstructor
-public final class UserApiStrict implements UserApi {
+public class UserApiStrict implements UserApi {
+
     private final UserApiStrict.Port port;
     @Override
-    public Optional<TokenUser> register(Usuario user) {
-
-        User register = port.register(user);
-
-        return null;
+    public User register(UserRequest user) {
+        return port.register(user);
     }
 
 
     public interface Port {
-        User register(Usuario user);
-
+        User register(UserRequest user);
     }
 }

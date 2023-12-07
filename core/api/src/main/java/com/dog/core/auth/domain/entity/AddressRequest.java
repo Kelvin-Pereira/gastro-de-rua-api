@@ -9,9 +9,8 @@ import java.time.LocalDateTime;
 @Builder
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class Address {
+public class AddressRequest {
 
-    private Long id;
     private String postalCode;
     private String street;
     private Integer number;
@@ -24,7 +23,5 @@ public class Address {
     private String ddd;
     private String siafi;
     private Boolean isPrimary;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
 
 }

@@ -1,4 +1,4 @@
-package com.dog.core.auth.domain.enums;
+package com.dog.postgres.auth.domain.enums;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
