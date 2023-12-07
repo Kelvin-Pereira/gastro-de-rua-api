@@ -99,17 +99,6 @@ public class UserEntity implements UserDetails {
         return optionalAddress.orElse(null);
     }
 
-    public static User toUser(UserEntity userEntity) {
-        User user = new User();
-        user.setId(userEntity.getId());
-        user.setName(userEntity.getName());
-        user.setEmail(userEntity.getUsername());
-        user.setPhone(userEntity.getPhone());
-        user.setRole(userEntity.getRole().toString());
-        user.setAddress(userEntity.getAddressEntities().stream().map(addressEntity -> addressEntity.toAddress(addressEntity)).toList());
-        return user;
-    }
-
     @PreUpdate
     protected void onUpdate() {
         updatedAt = LocalDateTime.now();

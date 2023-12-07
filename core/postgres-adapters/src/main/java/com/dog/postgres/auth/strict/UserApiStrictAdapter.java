@@ -1,9 +1,10 @@
 package com.dog.postgres.auth.strict;
 
 import com.dog.core.auth.domain.entity.User;
-import com.dog.core.auth.domain.entity.UserRequest;
+import com.dog.core.auth.domain.entity.UserRegisterRequest;
 import com.dog.core.auth.strict.UserApiStrict;
 import com.dog.postgres.auth.domain.entity.UserEntity;
+import com.dog.postgres.auth.domain.mapper.UserMapper;
 import com.dog.postgres.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -12,16 +13,10 @@ public final class UserApiStrictAdapter implements UserApiStrict.Port {
 
     private final UserRepository userRepository;
     @Override
-    public User register(UserRequest user) {
-        var userBuilder = UserEntity.builder()
-                .name(user.getName())
-                .email(user.getEmail().endereco())
-                .birthDate(user.getBirthDate())
-                .password(user.getPassword())
-                .build();
+    public User register(UserRegisterRequest userRegisterRequest) {
 
-        UserEntity userEntity = userRepository.save(userBuilder);
+        UserEntity userEntity = userRepository.save(UserMapper.toUserEntity(userRegisterRequest));
 
-        return UserEntity.toUser(userEntity);
+        return UserMapper.toUser(userEntity);
     }
 }

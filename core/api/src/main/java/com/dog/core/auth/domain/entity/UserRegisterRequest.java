@@ -14,13 +14,14 @@ import java.time.LocalDate;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class UserRequest {
+public class UserRegisterRequest {
 
     private String name;
     private Email email;
     private LocalDate birthDate;
     private String password;
     private Telefone phone;
+    private String role;
     private AddressRequest address;
 
 }

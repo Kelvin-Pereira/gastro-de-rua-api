@@ -5,7 +5,8 @@ import com.dog.arquitetura.brasil.Telefone;
 import com.dog.core.auth.UserApi;
 import com.dog.core.auth.domain.entity.AddressRequest;
 import com.dog.core.auth.domain.entity.TokenResponse;
-import com.dog.core.auth.domain.entity.UserRequest;
+import com.dog.core.auth.domain.entity.User;
+import com.dog.core.auth.domain.entity.UserRegisterRequest;
 import com.dog.web.type.InputType;
 import lombok.RequiredArgsConstructor;
 
@@ -17,14 +18,20 @@ public class UcRegistrarUsuario implements Function<UcRegistrarUsuario.Input, To
 
     private final UserApi userApi;
 
+    private static final String CUSTOMER = "CUSTOMER";
+
     @Override // criptografar a senha
     public TokenResponse apply(Input input) {
-        var user = userApi.register(new UserRequest(
+
+        input.address.setIsPrimary(false);
+
+        User user = userApi.register(new UserRegisterRequest(
                 input.nome,
                 input.email(),
                 input.birthDate(),
                 input.password(),
                 input.telefone(),
+                CUSTOMER,
                 input.address()));
 
         System.out.println(user.getName());

@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -68,26 +69,6 @@ public class AddressEntity {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
-
-    public Address toAddress(AddressEntity addressEntity){
-        Address address = new Address();
-        address.setId(addressEntity.getId());
-        address.setPostalCode(addressEntity.getPostalCode());
-        address.setStreet(addressEntity.getStreet());
-        address.setNumber(addressEntity.getNumber());
-        address.setComplement(addressEntity.getComplement());
-        address.setNeighborhood(addressEntity.getNeighborhood());
-        address.setCity(addressEntity.getCity());
-        address.setState(addressEntity.getState());
-        address.setIbgeCode(addressEntity.getIbgeCode());
-        address.setGia(addressEntity.getGia());
-        address.setDdd(addressEntity.getDdd());
-        address.setSiafi(addressEntity.getSiafi());
-        address.setIsPrimary(addressEntity.getIsPrimary());
-        address.setCreatedAt(addressEntity.getCreatedAt());
-        address.setUpdatedAt(addressEntity.getUpdatedAt());
-        return address;
-    }
 
     @PrePersist
     protected void onCreate() {
