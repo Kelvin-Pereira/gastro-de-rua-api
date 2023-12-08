@@ -29,10 +29,6 @@ create table address (
              neighborhood varchar(100)    not null,
              city         varchar(100)    not null,
              state        varchar(2)      not null,
-             ibge_code     varchar(100)   not null,
-             gia          varchar(100)    not null,
-             ddd          varchar(3)      not null,
-             siafi        varchar(100)    not null,
              created_at   timestamp not null,
              updated_at   timestamp not null,
              deleted_at   timestamp,
@@ -40,8 +36,8 @@ create table address (
 );
 alter table address owner to username;
 -- Inserir um endereço relacionado ao usuário
-INSERT INTO address (user_id, is_primary, postal_code, number, street, complement, neighborhood, city, state, ibge_code, gia, ddd, siafi, created_at, updated_at)
-VALUES (1, true, '01234567', 23, 'Rua Principal', 'Apto 123', 'Bairro Central', 'Cidade', 'DF', '123456', '789', '11', '9876', NOW(), NOW());
+INSERT INTO address (user_id, is_primary, postal_code, number, street, complement, neighborhood, city, state,  created_at, updated_at)
+VALUES (1, true, '01234567', 23, 'Rua Principal', 'Apto 123', 'Bairro Central', 'Cidade', 'DF', NOW(), NOW());
 
 create table token (
     id         bigserial not null primary key,

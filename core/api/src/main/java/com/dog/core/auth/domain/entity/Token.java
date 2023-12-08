@@ -6,17 +6,12 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class Token {
+public interface Token {
 
-  private Long id;
-  private String token;
-  private TokenType tokenType;
-  private boolean revoked;
-  private boolean expired;
-  private User user;
+  Long id();
+  String token();
+  TokenType tokenType();
+  boolean isRevoked();
+  boolean isExpired();
 
 }

@@ -1,40 +1,44 @@
 package com.dog.core.auth.domain.entity;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
-@AllArgsConstructor
-public class User {
+public interface User {
 
-    private Long id;
-    private String name;
-    private String email;
-    private LocalDate birthDate;
-    private String urlPhoto;
-    private String phone;
-    private String role;
-    private List<Token> tokens;
-    private List<Address> address;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    String name();
 
-    public Address getAddressPrincipal() {
-        Optional<Address> optionalAddress = getAddress()
+    String email();
+
+    LocalDate birthDate();
+
+    String urlPhoto();
+
+    String phone();
+
+    String role();
+
+    String password();
+
+    List<Token> tokens();
+
+    List<Address> address();
+
+    default Address getAddressPrincipal() {
+        Optional<Address> optionalAddress = address()
                 .stream()
-                .filter(Address::getIsPrimary)
+                .filter(Address::isPrimary)
                 .findFirst();
         return optionalAddress.orElse(null);
+    }
+
+    default String getPassword(UnaryOperator<String> cryptPassword){
+        return cryptPassword.apply(password());
     }
 
 }

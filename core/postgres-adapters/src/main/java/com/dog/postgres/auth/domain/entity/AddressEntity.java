@@ -42,18 +42,6 @@ public class AddressEntity {
     @Column(name = "state")
     private String state;
 
-    @Column(name = "ibge_code")
-    private String ibgeCode;
-
-    @Column(name = "gia")
-    private String gia;
-
-    @Column(name = "ddd")
-    private String ddd;
-
-    @Column(name = "siafi")
-    private String siafi;
-
     @Column(name = "is_primary")
     private Boolean isPrimary;
 
@@ -69,6 +57,17 @@ public class AddressEntity {
 
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
+
+    public AddressEntity(Address address){
+        this.postalCode = address.postalCode();
+        this.street = address.street();
+        this.number = address.number();
+        this.complement = address.complement();
+        this.neighborhood = address.neighborhood();
+        this.city = address.city();
+        this.state = address.state();
+        this.isPrimary = address.isPrimary();
+    }
 
     @PrePersist
     protected void onCreate() {

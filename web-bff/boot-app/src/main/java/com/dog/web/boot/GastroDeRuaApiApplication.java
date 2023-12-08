@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@EnableJpaRepositories(basePackages = {"com.dog.postgres.auth.repository"})
+@EnableJpaRepositories(basePackages = {"com.dog.postgres"})
 @SpringBootApplication
 public class GastroDeRuaApiApplication {
 

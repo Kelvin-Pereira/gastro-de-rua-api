@@ -85,6 +85,16 @@ public class UserEntity implements UserDetails {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
+    public UserEntity(User user) {
+        this.name = user.name();
+        this.email = user.email();
+        this.birthDate = user.birthDate();
+        this.password = user.password();
+        this.phone = user.phone();
+        this.role = Role.valueOf(user.role());
+        this.addressEntities = user.address().stream().map(AddressEntity::new).toList();
+    }
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();

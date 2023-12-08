@@ -1,24 +1,24 @@
 package com.dog.postgres.auth.strict;
 
 import com.dog.core.auth.domain.entity.User;
-import com.dog.core.auth.strict.UserApiStrict;
+import com.dog.core.auth.strict.UserRegisterApiStrict;
 import com.dog.postgres.auth.domain.entity.UserEntity;
 import com.dog.postgres.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Component
 @RequiredArgsConstructor
-public class UserApiStrictAdapter implements UserApiStrict.Port {
+public final class UserRegisterApiStrictAdapter implements UserRegisterApiStrict.Port {
 
     private final UserRepository userRepository;
 
     @Override
-    public Optional<User> findByEmail(String email) {
-        Optional<UserEntity> byEmail = userRepository.findByEmail(email);
-        return Optional.empty();
+    public User register(User user) {
+
+        UserEntity userEntity = new UserEntity(user);
+               return  (User) userRepository.save(userEntity);
+
     }
 }

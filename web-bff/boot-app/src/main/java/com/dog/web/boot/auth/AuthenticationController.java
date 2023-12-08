@@ -2,6 +2,8 @@ package com.dog.web.boot.auth;
 
 import com.dog.core.auth.domain.entity.TokenResponse;
 import com.dog.web.auth.UcRegistrarUsuario;
+import com.dog.web.auth.UserRegisterInput;
+import com.dog.web.boot.auth.password.PasswordCrypto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,10 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final UcRegistrarUsuario ucRegistrarUsuario;
+    private final PasswordCrypto passwordCrypto;
 
     @PostMapping("/registrar")
-    public ResponseEntity<TokenResponse> register(@RequestBody @Valid UcRegistrarUsuario.Input request) {
-        return ResponseEntity.ok(ucRegistrarUsuario.apply(request));
+    public ResponseEntity<TokenResponse> register(@RequestBody @Valid UserRegisterInput request) {
+        return ResponseEntity.ok(ucRegistrarUsuario.apply(passwordCrypto.cryptPassword(request)));
     }
 
 //    @PostMapping("/autenticar")
