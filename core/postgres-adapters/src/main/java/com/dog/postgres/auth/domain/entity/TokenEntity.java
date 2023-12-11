@@ -3,7 +3,10 @@ package com.dog.postgres.auth.domain.entity;
 import com.dog.postgres.auth.domain.enums.TokenType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter

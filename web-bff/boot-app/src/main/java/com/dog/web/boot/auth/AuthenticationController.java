@@ -2,7 +2,6 @@ package com.dog.web.boot.auth;
 
 import com.dog.core.auth.domain.entity.TokenResponse;
 import com.dog.web.auth.UcRegistrarUsuario;
-import com.dog.web.boot.auth.password.PasswordCrypto;
 import com.dog.web.type.auth.AddressRegisterType;
 import com.dog.web.type.auth.UserRegisterType;
 import lombok.RequiredArgsConstructor;

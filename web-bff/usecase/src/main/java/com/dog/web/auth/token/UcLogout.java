@@ -1,6 +1,5 @@
 package com.dog.web.auth.token;
 
-import com.dog.core.auth.TokenApi;
 import com.dog.core.auth.domain.entity.Token;
 import com.dog.core.auth.domain.enums.TokenType;
 import lombok.RequiredArgsConstructor;

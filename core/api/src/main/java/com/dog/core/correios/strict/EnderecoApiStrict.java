@@ -3,9 +3,9 @@ package com.dog.core.correios.strict;
 
 import com.dog.arquitetura.lang.annotation.Nullable;
 import com.dog.core.correios.*;
+import com.dog.core.ibge.Distrito;
 import com.dog.core.ibge.DistritoSearchApi;
 import com.dog.core.ibge.Municipio;
-import com.dog.core.ibge.Distrito;
 import com.dog.core.ibge.MunicipioSearchApi;
 import lombok.RequiredArgsConstructor;
 

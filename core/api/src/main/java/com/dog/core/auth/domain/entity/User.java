@@ -2,11 +2,8 @@ package com.dog.core.auth.domain.entity;
 
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public interface User {
