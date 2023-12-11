@@ -25,7 +25,7 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
 
     private static final String[] PERMITS = {
-            "/api/v1/login/usuario/register",
+            "/api/v1/login/registrar",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",
@@ -46,11 +46,8 @@ public class SecurityConfiguration {
 
         return http
                 .csrf(AbstractHttpConfigurer::disable)
-                .securityMatchers(matchers -> matchers
-                        .requestMatchers(PERMITS)
-                )
                 .authorizeHttpRequests(auth -> auth.requestMatchers(PERMITS)
-                        .permitAll())
+                        .permitAll().anyRequest().authenticated())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
@@ -58,7 +55,5 @@ public class SecurityConfiguration {
                         .invalidateHttpSession(false).logoutUrl("/api/v1/login/usuario/logout")
                         .addLogoutHandler(logoutHandler)
                         .logoutSuccessHandler(((request, response, authentication) -> SecurityContextHolder.clearContext()))).build();
-
     }
-
 }
