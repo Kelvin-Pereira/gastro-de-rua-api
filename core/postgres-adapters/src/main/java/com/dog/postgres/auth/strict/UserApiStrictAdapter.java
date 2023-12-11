@@ -1,18 +1,17 @@
 package com.dog.postgres.auth.strict;
 
+import com.dog.core.auth.UserApi;
 import com.dog.core.auth.domain.entity.User;
-import com.dog.core.auth.strict.UserApiStrict;
 import com.dog.postgres.auth.domain.entity.UserEntity;
 import com.dog.postgres.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
-public class UserApiStrictAdapter implements UserApiStrict.Port {
+public final class UserApiStrictAdapter implements UserApi {
 
     private final UserRepository userRepository;
 

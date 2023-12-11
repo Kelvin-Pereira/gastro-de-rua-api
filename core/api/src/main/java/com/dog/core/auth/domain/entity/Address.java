@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 public interface Address {
 
+    Long id();
     String postalCode();
 
     String street();

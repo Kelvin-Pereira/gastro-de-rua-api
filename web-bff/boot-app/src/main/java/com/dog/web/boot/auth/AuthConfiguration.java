@@ -3,49 +3,35 @@ package com.dog.web.boot.auth;
 import com.dog.core.auth.TokenApi;
 import com.dog.core.auth.UserApi;
 import com.dog.core.auth.UserRegisterApi;
-import com.dog.core.auth.strict.UserApiStrict;
-import com.dog.core.auth.strict.UserRegisterApiStrict;
-import com.dog.core.auth.token.TokenApiStrict;
-import com.dog.postgres.auth.repository.TokenRepository;
-import com.dog.postgres.auth.repository.UserRepository;
-import com.dog.postgres.auth.strict.UserApiStrictAdapter;
-import com.dog.postgres.auth.strict.UserRegisterApiStrictAdapter;
-import com.dog.postgres.auth.token.TokenApiStrictAdapter;
 import com.dog.web.auth.UcFindUserByEmailUser;
 import com.dog.web.auth.UcRegistrarUsuario;
+import com.dog.web.auth.token.UcCryptoToken;
 import com.dog.web.auth.token.UcLogout;
-import com.dog.web.boot.config.security.JwtExtract;
+import com.dog.web.auth.token.UcToken;
+import com.dog.web.boot.auth.password.PasswordCrypto;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration(proxyBeanMethods = false)
 
 public class AuthConfiguration {
 
-
-    // Register
     @Bean
-    UserRegisterApiStrict userRegisterApiStrict(UserRegisterApiStrict.Port port) {
-        return new UserRegisterApiStrict(port);
-    }
-
-    @Bean
-    UcRegistrarUsuario ucRegistrarUsuario(UserRegisterApi userRegisterApi) {
-        return new UcRegistrarUsuario(userRegisterApi);
+    UcRegistrarUsuario ucRegistrarUsuario(UserRegisterApi userRegisterApi, UcCryptoToken ucCryptoToken) {
+        return new UcRegistrarUsuario(userRegisterApi, ucCryptoToken);
     }
 
     //Token
     @Bean
-    TokenApiStrict tokenApiStrict(TokenApiStrict.Port port) {
-        return new TokenApiStrict(port);
+    UcToken ucToken(TokenApi tokenApi) {
+        return new UcToken(tokenApi);
     }
 
     @Bean
-    UcLogout ucLogout(TokenApi tokenApi) {
-        return new UcLogout(tokenApi);
+    UcLogout ucLogout(UcToken ucToken) {
+        return new UcLogout(ucToken);
     }
-
 
     //User
     @Bean
@@ -54,8 +40,13 @@ public class AuthConfiguration {
     }
 
     @Bean
-    UserApiStrict userApiStrict(UserApiStrict.Port port){
-        return new UserApiStrict(port);
+    PasswordCrypto passwordCrypto(PasswordEncoder passwordCrypto){
+        return new PasswordCrypto(passwordCrypto);
     }
+    @Bean
+    UcCryptoToken ucCryptoToken(PasswordCrypto passwordCrypto){
+        return new UcCryptoToken(passwordCrypto.cryptApi());
+    }
+
 
 }

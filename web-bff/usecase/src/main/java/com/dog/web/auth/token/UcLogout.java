@@ -10,13 +10,13 @@ import java.util.function.Consumer;
 @RequiredArgsConstructor
 public final class UcLogout implements Consumer<String> {
 
-    private final TokenApi tokenApi;
+    private final UcToken ucToken;
 
     // Todo tratar orElseThrow
     @Override
     public void accept(String token) {
-        Token byToken = tokenApi.findByToken(token).orElseThrow();
-        tokenApi.update(new Logout(byToken));
+        Token byToken = ucToken.findByToken(token).orElseThrow();
+        ucToken.update(new Logout(byToken));
     }
 
     public record Logout(Token byToken) implements Token {

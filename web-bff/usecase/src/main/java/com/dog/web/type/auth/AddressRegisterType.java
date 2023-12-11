@@ -8,19 +8,12 @@ import lombok.Setter;
 @Setter
 public class AddressRegisterType implements InputType {
 
-
     private String postalCode;
-
     private String street;
-
     private Integer number;
-
     private String complement;
-
     private String neighborhood;
-
     private String city;
-
     private String state;
 
 }

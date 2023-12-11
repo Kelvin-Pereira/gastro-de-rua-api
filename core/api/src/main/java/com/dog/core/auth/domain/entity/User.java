@@ -11,6 +11,8 @@ import java.util.function.UnaryOperator;
 
 public interface User {
 
+    Long id();
+
     String name();
 
     String email();

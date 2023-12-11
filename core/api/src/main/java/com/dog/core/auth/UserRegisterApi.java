@@ -6,7 +6,7 @@ import com.dog.core.auth.domain.entity.User;
 
 public interface UserRegisterApi {
 
-    User register(FormUserRegister user);
+    User register(User user);
 
     record FormUserRegister(User user,
                             Address address) {

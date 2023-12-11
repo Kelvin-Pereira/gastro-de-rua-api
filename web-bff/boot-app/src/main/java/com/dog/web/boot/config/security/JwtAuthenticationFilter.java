@@ -1,7 +1,6 @@
 package com.dog.web.boot.config.security;
 
-import com.dog.core.auth.TokenApi;
-import com.dog.core.auth.token.TokenApiStrict;
+import com.dog.web.auth.token.UcToken;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -24,7 +23,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
   private final JwtExtract jwtExtract;
   private final UserDetailsService userDetailsService;
-  private final TokenApiStrict tokenApiStrict;
+  private final UcToken ucToken;
 
   // TODO verificar se está vindo token
   @Override
@@ -48,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     userEmail = jwtExtract.extractUsername(jwt);
     if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
       UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
-      var isTokenValid = tokenApiStrict.findByToken(jwt)
+      var isTokenValid = ucToken.findByToken(jwt)
           .map(t -> !t.isExpired() && !t.isRevoked())
           .orElse(false);
       if (jwtExtract.isTokenValid(jwt, userDetails) && Boolean.TRUE.equals(isTokenValid)) {
