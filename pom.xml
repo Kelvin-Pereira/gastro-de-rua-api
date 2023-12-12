@@ -8,6 +8,7 @@
         <version>3.2.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>com.dog.api</groupId>
     <artifactId>gastro-de-rua-api</artifactId>
     <version>0.0.1-SNAPSHOT</version>
@@ -23,9 +24,10 @@
         <profile>
             <id>modules</id>
             <modules>
-                <module>core</module>
                 <module>arquitetura</module>
-                <module>web-bff</module>
+                <module>core</module>
+                <module>framework</module>
+                <module>use</module>
             </modules>
         </profile>
     </profiles>
