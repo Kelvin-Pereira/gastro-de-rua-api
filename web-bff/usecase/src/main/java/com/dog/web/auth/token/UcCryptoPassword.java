@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 import java.util.function.UnaryOperator;
 
 @RequiredArgsConstructor
-public class UcCryptoToken implements UnaryOperator<String>{
+public class UcCryptoPassword implements UnaryOperator<String>{
 
     private final UnaryOperator<String> crypt;
 

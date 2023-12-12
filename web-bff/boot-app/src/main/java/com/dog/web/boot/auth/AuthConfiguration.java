@@ -5,7 +5,7 @@ import com.dog.core.auth.UserApi;
 import com.dog.core.auth.UserRegisterApi;
 import com.dog.web.auth.UcFindUserByEmailUser;
 import com.dog.web.auth.UcRegistrarUsuario;
-import com.dog.web.auth.token.UcCryptoToken;
+import com.dog.web.auth.token.UcCryptoPassword;
 import com.dog.web.auth.token.UcLogout;
 import com.dog.web.auth.token.UcToken;
 import com.dog.web.boot.auth.password.PasswordCrypto;
@@ -18,8 +18,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class AuthConfiguration {
 
     @Bean
-    UcRegistrarUsuario ucRegistrarUsuario(UserRegisterApi userRegisterApi, UcCryptoToken ucCryptoToken) {
-        return new UcRegistrarUsuario(userRegisterApi, ucCryptoToken);
+    UcRegistrarUsuario ucRegistrarUsuario(UserRegisterApi userRegisterApi, UcCryptoPassword ucCryptoPassWord) {
+        return new UcRegistrarUsuario(userRegisterApi, ucCryptoPassWord);
     }
 
     //Token
@@ -44,8 +44,8 @@ public class AuthConfiguration {
         return new PasswordCrypto(passwordCrypto);
     }
     @Bean
-    UcCryptoToken ucCryptoToken(PasswordCrypto passwordCrypto){
-        return new UcCryptoToken(passwordCrypto.cryptApi());
+    UcCryptoPassword ucCryptoToken(PasswordCrypto passwordCrypto){
+        return new UcCryptoPassword(passwordCrypto.cryptApi());
     }
 
 

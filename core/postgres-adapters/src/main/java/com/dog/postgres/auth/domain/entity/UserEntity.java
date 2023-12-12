@@ -2,6 +2,7 @@ package com.dog.postgres.auth.domain.entity;
 
 
 import com.dog.core.auth.domain.entity.User;
+import com.dog.core.auth.domain.enums.PermissionEnum;
 import com.dog.postgres.auth.domain.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 
 @Getter
@@ -91,7 +93,7 @@ public class UserEntity implements UserDetails {
         this.birthDate = user.birthDate();
         this.password = user.password();
         this.phone = user.phone();
-        this.role = Role.valueOf(user.role());
+        this.role = Role.valueOf(user.role().permissions().stream().map(PermissionEnum::getPermission).collect(Collectors.joining()));// TODO corrigir bagunca
         this.addressEntities = user.address().stream().map(AddressEntity::new).toList();
     }
 

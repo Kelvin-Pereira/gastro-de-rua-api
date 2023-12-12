@@ -1,6 +1,8 @@
 package com.dog.core.auth.domain.entity;
 
 
+import com.dog.core.auth.domain.enums.Permission;
+
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +22,7 @@ public interface User {
 
     String phone();
 
-    String role();
+    Permission role();
 
     String password();
 

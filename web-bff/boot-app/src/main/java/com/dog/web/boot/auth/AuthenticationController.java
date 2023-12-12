@@ -23,7 +23,7 @@ public class AuthenticationController {
 
     @PostMapping("/registrar")
     public ResponseEntity<TokenResponse> register(@RequestBody UserRegisterType userRegisterType) {
-        return ResponseEntity.ok(ucRegistrarUsuario.apply(new UcRegistrarUsuario.Input(userRegisterType, new AddressRegisterType())));
+        return ResponseEntity.ok(ucRegistrarUsuario.apply(userRegisterType));
     }
 
 //    @PostMapping("/autenticar")

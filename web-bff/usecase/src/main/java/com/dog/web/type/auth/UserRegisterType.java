@@ -15,7 +15,6 @@ public class UserRegisterType implements InputType {
     private LocalDate birthDate;
     private String phone;
     private String password;
-    private String role;  // Type ENUM
     private AddressRegisterType address;
 
 }
