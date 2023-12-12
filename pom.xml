@@ -27,7 +27,6 @@
                 <module>arquitetura</module>
                 <module>core</module>
                 <module>framework</module>
-                <module>use</module>
             </modules>
         </profile>
     </profiles>
