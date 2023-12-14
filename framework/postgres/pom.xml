@@ -37,7 +37,7 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>core</artifactId>
+            <artifactId>usecase</artifactId>
             <version>3.2.0</version>
             <scope>compile</scope>
         </dependency>

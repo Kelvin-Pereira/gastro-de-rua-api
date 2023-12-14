@@ -14,10 +14,10 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>arquitetura</artifactId>
+            <version>${project.version}</version>
         </dependency>
-
     </dependencies>
 
 </project>

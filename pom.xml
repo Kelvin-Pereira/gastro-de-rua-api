@@ -25,8 +25,8 @@
             <id>modules</id>
             <modules>
                 <module>arquitetura</module>
-                <module>core</module>
                 <module>framework</module>
+                <module>usecase</module>
             </modules>
         </profile>
     </profiles>
