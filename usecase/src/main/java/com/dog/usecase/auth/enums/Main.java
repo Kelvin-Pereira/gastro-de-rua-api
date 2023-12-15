@@ -10,6 +10,7 @@ public class Main {
 
 
         role.permissions().forEach(e-> System.out.println(e.getPermission()));
+        role.permissions().forEach(e-> System.out.println(e));
     }
 
 }

@@ -8,11 +8,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "token")
 public class TokenEntity {
 
   @Id
@@ -26,8 +29,10 @@ public class TokenEntity {
   @Enumerated(EnumType.STRING)
   public TokenType tokenType = TokenType.BEARER;
 
+  @Column(name = "expired")
   public boolean revoked;
 
+  @Column(name = "revoked")
   public boolean expired;
 
   @ManyToOne(fetch = FetchType.LAZY)

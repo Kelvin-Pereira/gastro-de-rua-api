@@ -1,8 +1,9 @@
 package com.dog.postgres.auth.domain.entity;
 
 
-import com.dog.postgres.auth.domain.enums.Role;
+import com.dog.postgres.converter.PermissionEnumSetConverter;
 import com.dog.usecase.auth.domain.User;
+import com.dog.usecase.auth.enums.Permission;
 import com.dog.usecase.auth.enums.PermissionEnum;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -14,6 +15,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
@@ -21,12 +23,11 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 
 @Getter
 @Setter
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
@@ -68,14 +69,13 @@ public class UserEntity implements UserDetails {
     private String phone;
 
     @Column(name = "role", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    @Convert(converter = PermissionEnumSetConverter.class)
+    private Permission role;
 
     @OneToMany(mappedBy = "userEntity")
     private List<TokenEntity> tokenEntities;
 
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
     private List<AddressEntity> addressEntities;
 
     @Column(name = "created_at", nullable = false)
@@ -93,8 +93,8 @@ public class UserEntity implements UserDetails {
         this.birthDate = user.birthDate();
         this.password = user.password();
         this.phone = user.phone();
-        this.role = Role.valueOf(user.role().permissions().stream().map(PermissionEnum::getPermission).collect(Collectors.joining()));// TODO corrigir bagunca
-        this.addressEntities = user.address().stream().map(AddressEntity::new).toList();
+        this.role = user.role();
+        this.addressEntities = user.address().stream().map(address -> new AddressEntity(address, this)).toList();
     }
 
     @PrePersist
@@ -123,7 +123,14 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return role.getAuthorities();
+        return getAuthorities(role.permissions());
+    }
+
+    private List<SimpleGrantedAuthority> getAuthorities(Set<PermissionEnum> permission) {
+        return permission
+                .stream()
+                .map(permissionEnum -> new SimpleGrantedAuthority(permissionEnum.name()))
+                .toList();
     }
 
     @Override

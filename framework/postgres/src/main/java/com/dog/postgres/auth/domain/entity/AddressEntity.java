@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
@@ -58,7 +59,7 @@ public class AddressEntity {
     @Column(name = "deleted_at")
     private LocalDateTime deletedAt;
 
-    public AddressEntity(Address address){
+    public AddressEntity(Address address, UserEntity userEntity){
         this.postalCode = address.postalCode();
         this.street = address.street();
         this.number = address.number();
@@ -67,6 +68,7 @@ public class AddressEntity {
         this.city = address.city();
         this.state = address.state();
         this.isPrimary = address.isPrimary();
+        this.userEntity = userEntity;
     }
 
     @PrePersist

@@ -5,6 +5,7 @@ package com.dog.usecase.auth.domain;
 import com.dog.usecase.auth.enums.Permission;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.UnaryOperator;
@@ -31,16 +32,16 @@ public interface User {
 
     List<Address> address();
 
+    LocalDateTime createdAt();
+
+    LocalDateTime updatedAt();
+
     default Address getAddressPrincipal() {
         Optional<Address> optionalAddress = address()
                 .stream()
                 .filter(Address::isPrimary)
                 .findFirst();
         return optionalAddress.orElse(null);
-    }
-
-    default String getPassword(UnaryOperator<String> cryptPassword){
-        return cryptPassword.apply(password());
     }
 
 }
