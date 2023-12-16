@@ -1,25 +1,18 @@
 package com.dog.usecase.type.auth;
 
-import com.dog.usecase.auth.repository.TokenUser;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-@RequiredArgsConstructor
+@Data
+@Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class TokenResponseType {
-
 
   private String accessToken;
 
   private String refreshToken;
-
-  public TokenResponseType(TokenUser tokenUser) {
-    this.accessToken = tokenUser.accessToken();
-    this.refreshToken = tokenUser.refreshToken();
-  }
 
 }

@@ -1,14 +1,12 @@
 package com.dog.usecase.auth.domain;
 
 
-
 import com.dog.usecase.auth.enums.Permission;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.UnaryOperator;
 
 public interface User {
 

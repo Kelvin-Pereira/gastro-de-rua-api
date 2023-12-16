@@ -1,10 +1,8 @@
 package com.dog.web.boot.config.security;
 
 
-import com.dog.usecase.auth.domain.Address;
 import com.dog.usecase.auth.domain.User;
-import com.dog.usecase.auth.services.FindUserByEmailUserService;
-import com.dog.web.boot.config.exception.EmailException;
+import com.dog.usecase.auth.services.token.ClaimsService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -12,15 +10,12 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 
 @Component
 @RequiredArgsConstructor
@@ -33,14 +28,14 @@ public class JwtExtract {
     @Value("${application.security.jwt.refresh-token.expiration}")
     private long refreshExpiration;
 
-    private final FindUserByEmailUserService findUserByEmailUserService;
+    private final ClaimsService claimsService;
 
-    public String extractUsername(String token) {
-        Claims claims = extractAllClaims(token);
+    public String extractUsername(String jwt) {
+        Claims claims = extractAllClaims(jwt);
         Object userClaimsObj = claims.get("user");
 
-        if (userClaimsObj instanceof Map) {
-            Map<String, Object> userClaims = (Map<String, Object>) userClaimsObj;
+        if (userClaimsObj instanceof Map<?, ?> userClaims) {
+//            Map<String, Object> userClaims = (Map<String, Object>) userClaimsObj;
             return userClaims.get("email").toString();
         }
 
@@ -52,47 +47,17 @@ public class JwtExtract {
         return claimsResolver.apply(claims);
     }
 
-    public String generateToken(UserDetails userDetails) {
-        Map<String, Object> claims = createClaim(userDetails);
+    public String generateToken(User user) {
+        Map<String, Object> claims = claimsService.apply(user.email());
         return generateToken(claims);
-    }
-
-    private Map<String, Object> createClaim(UserDetails userDetails) {
-        User user = findUserByEmailUserService.apply(userDetails.getUsername()).orElseThrow(EmailException::emailNaoEncontrado);
-        Map<String, Object> claims = new HashMap<>();
-
-        Map<String, Object> claimsUser = new HashMap<>();
-        claimsUser.put("name", user.name());
-        claimsUser.put("email", user.email());
-        claimsUser.put("birthDate", user.birthDate().toString());
-        claimsUser.put("urlPhoto", user.phone());
-        claims.put("user", claimsUser);
-        claims.put("email", user.email());
-
-        Address address = user.getAddressPrincipal();
-        if (address != null) {
-            Map<String, Object> claimsAddress = new HashMap<>();
-            claimsAddress.put("postalCode", address.postalCode());
-            claimsAddress.put("street", address.street());
-            claimsAddress.put("number", address.number());
-            claimsAddress.put("complement", address.complement());
-            claimsAddress.put("neighborhood", address.neighborhood());
-            claimsAddress.put("city", address.city());
-            claimsAddress.put("state", address.state());
-            claims.put("address", claimsAddress);
-        }
-
-        claims.put("role", userDetails.getAuthorities().stream().map(Object::toString).collect(Collectors.joining(",")));
-
-        return claims;
     }
 
     public String generateToken(Map<String, Object> extraClaims) {
         return buildToken(extraClaims, jwtExpiration);
     }
 
-    public String generateRefreshToken(UserDetails userDetails) {
-        return buildToken(createClaim(userDetails), refreshExpiration);
+    public String generateRefreshToken(User user) {
+        return buildToken(claimsService.apply(user.email()), refreshExpiration);
     }
 
     private String buildToken(Map<String, Object> extraClaims, long expiration) {
@@ -105,9 +70,9 @@ public class JwtExtract {
                 .compact();
     }
 
-    public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+    public boolean isTokenValid(String jwt, User userDetails) {
+        final String username = extractUsername(jwt);
+        return (username.equals(userDetails.email())) && !isTokenExpired(jwt);
     }
 
     private boolean isTokenExpired(String token) {
@@ -118,12 +83,12 @@ public class JwtExtract {
         return extractClaim(token, Claims::getExpiration);
     }
 
-    private Claims extractAllClaims(String token) {
+    private Claims extractAllClaims(String jwt) {
         return Jwts
                 .parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
-                .parseClaimsJws(token)
+                .parseClaimsJws(jwt)
                 .getBody();
     }
 

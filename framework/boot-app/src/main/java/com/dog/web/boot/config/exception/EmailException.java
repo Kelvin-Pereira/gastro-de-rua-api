@@ -7,7 +7,7 @@ public class EmailException extends RuntimeException {
 
     private final int code;
 
-    private EmailException(String message, int statusCode) {
+    public EmailException(String message, int statusCode) {
         super(message);
         this.code = statusCode;
     }

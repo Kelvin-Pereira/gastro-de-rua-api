@@ -10,9 +10,10 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import lombok.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -126,7 +127,7 @@ public class UserEntity implements UserDetails {
         return getAuthorities(role.permissions());
     }
 
-    private List<SimpleGrantedAuthority> getAuthorities(Set<PermissionEnum> permission) {
+    public static List<SimpleGrantedAuthority> getAuthorities(Set<PermissionEnum> permission) {
         return permission
                 .stream()
                 .map(permissionEnum -> new SimpleGrantedAuthority(permissionEnum.name()))

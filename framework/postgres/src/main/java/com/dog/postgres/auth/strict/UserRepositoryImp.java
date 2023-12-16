@@ -2,6 +2,7 @@ package com.dog.postgres.auth.strict;
 
 import com.dog.postgres.auth.domain.entity.UserEntity;
 import com.dog.postgres.auth.repository.UserRepositoryJpa;
+import com.dog.postgres.mapper.UserEntityToUserMapper;
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +18,8 @@ public final class UserRepositoryImp implements UserRepository {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        Optional<UserEntity> byEmail = userRepositoryJpa.findByEmail(email);
-        return Optional.empty();
+        // TODO tratar error
+        UserEntity userEntity = userRepositoryJpa.findByEmail(email).orElseThrow();
+        return Optional.of(new UserEntityToUserMapper(userEntity));
     }
 }

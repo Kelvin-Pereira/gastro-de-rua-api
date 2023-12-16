@@ -1,8 +1,10 @@
 package com.dog.web.boot.auth;
 
+import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.services.RegistrarUsuarioService;
 import com.dog.usecase.type.auth.TokenResponseType;
 import com.dog.usecase.type.auth.UserRegisterType;
+import com.dog.web.boot.config.security.JwtExtract;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,20 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthenticationController {
 
     private final RegistrarUsuarioService registrarUsuarioService;
+    private final JwtExtract jwtExtract;
 
     @PostMapping("/registrar")
     public ResponseEntity<TokenResponseType> register(@RequestBody UserRegisterType userRegisterType) {
-        return ResponseEntity.ok(registrarUsuarioService.apply(userRegisterType));
+
+        User user = registrarUsuarioService.apply(userRegisterType);
+
+        var jwtToken = jwtExtract.generateToken(user);
+        var refreshToken = jwtExtract.generateRefreshToken(user);
+
+        return ResponseEntity.ok(TokenResponseType.builder()
+                .accessToken(jwtToken)
+                .refreshToken(refreshToken)
+                .build());
     }
 
 //    @PostMapping("/autenticar")
