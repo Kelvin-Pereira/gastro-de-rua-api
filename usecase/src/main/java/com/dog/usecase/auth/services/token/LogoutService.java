@@ -18,6 +18,8 @@ public final class LogoutService implements Consumer<String> {
         tokenService.update(new Logout(byToken));
     }
 
+
+    // TODO criar mapper
     public record Logout(Token byToken) implements Token {
         @Override
         public Long id() {

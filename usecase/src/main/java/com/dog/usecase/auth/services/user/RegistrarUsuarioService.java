@@ -21,7 +21,7 @@ public final class RegistrarUsuarioService implements Function<UserRegisterType,
 
     @Override
     public User apply(UserRegisterType input) {
-        cryptoPassword(input);// Todo Tratar erros de banco exemplo email repetidos
+        cryptoPassword(input);// Todo Tratar erros de banco exemplo cadastro com email repetidos
 
         return userRegisterRepository.register(new UserRegisterTypeToUserMapper(input, userPermissions()));
 
