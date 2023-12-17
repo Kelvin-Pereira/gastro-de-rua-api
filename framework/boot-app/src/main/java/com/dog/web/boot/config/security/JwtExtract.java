@@ -35,7 +35,6 @@ public class JwtExtract {
         Object userClaimsObj = claims.get("user");
 
         if (userClaimsObj instanceof Map<?, ?> userClaims) {
-//            Map<String, Object> userClaims = (Map<String, Object>) userClaimsObj;
             return userClaims.get("email").toString();
         }
 
@@ -48,7 +47,7 @@ public class JwtExtract {
     }
 
     public String generateToken(User user) {
-        Map<String, Object> claims = claimsService.apply(user.email());
+        Map<String, Object> claims = claimsService.apply(user);
         return generateToken(claims);
     }
 
@@ -57,7 +56,7 @@ public class JwtExtract {
     }
 
     public String generateRefreshToken(User user) {
-        return buildToken(claimsService.apply(user.email()), refreshExpiration);
+        return buildToken(claimsService.apply(user), refreshExpiration);
     }
 
     private String buildToken(Map<String, Object> extraClaims, long expiration) {

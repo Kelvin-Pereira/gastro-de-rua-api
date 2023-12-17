@@ -3,12 +3,12 @@ package com.dog.web.boot.auth.config;
 import com.dog.usecase.auth.repository.TokenRepository;
 import com.dog.usecase.auth.repository.UserRegisterRepository;
 import com.dog.usecase.auth.repository.UserRepository;
-import com.dog.usecase.auth.services.user.FindUserByEmailUserService;
-import com.dog.usecase.auth.services.user.RegistrarUsuarioService;
 import com.dog.usecase.auth.services.token.ClaimsService;
 import com.dog.usecase.auth.services.token.CryptoPasswordService;
 import com.dog.usecase.auth.services.token.LogoutService;
 import com.dog.usecase.auth.services.token.TokenService;
+import com.dog.usecase.auth.services.user.FindUserByEmailUserService;
+import com.dog.usecase.auth.services.user.RegistrarUsuarioService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,8 +49,8 @@ public class AuthConfigurationBeans {
     }
 
     @Bean
-    ClaimsService claimsService(FindUserByEmailUserService findUserByEmailUserService) {
-        return new ClaimsService(findUserByEmailUserService);
+    ClaimsService claimsService() {
+        return new ClaimsService();
     }
 
 

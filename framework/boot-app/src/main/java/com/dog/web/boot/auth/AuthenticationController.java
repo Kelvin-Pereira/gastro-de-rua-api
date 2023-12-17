@@ -63,9 +63,6 @@ public class AuthenticationController {
 //        tokenRefreshService.accept(request, response);
 //    }
 
-
-    // TODO ao registar um novo usuario está fazendo select duas vezes no findByEmail, uma vez para jwtExtract.generateToken e outra no jwtExtract.generateRefreshToken(user)
-    // aprimorar geracao do token
     private ResponseEntity<TokenResponseType> getTokenResponseTypeResponseEntity(User user) {
         var jwtToken = jwtExtract.generateToken(user);
         var refreshToken = jwtExtract.generateRefreshToken(user);

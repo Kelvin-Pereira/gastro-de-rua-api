@@ -2,7 +2,6 @@ package com.dog.usecase.auth.services.token;
 
 import com.dog.usecase.auth.domain.Address;
 import com.dog.usecase.auth.domain.User;
-import com.dog.usecase.auth.services.user.FindUserByEmailUserService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collections;
@@ -12,13 +11,10 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
-public final class ClaimsService implements Function<String, Map<String, Object>> {
-
-    private final FindUserByEmailUserService findUserByEmailUserService;
+public final class ClaimsService implements Function<User, Map<String, Object>> {
 
     @Override
-    public Map<String, Object> apply(String email) {
-        User user = findUserByEmail(email);
+    public Map<String, Object> apply(User user) {
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("user", createUserClaims(user));
@@ -27,11 +23,6 @@ public final class ClaimsService implements Function<String, Map<String, Object>
         claims.put("role", extractRoles(user));
 
         return claims;
-    }
-
-    private User findUserByEmail(String email) {
-        // TODO exception tratar
-        return findUserByEmailUserService.apply(email).orElseThrow();
     }
 
     private Map<String, Object> createUserClaims(User user) {
