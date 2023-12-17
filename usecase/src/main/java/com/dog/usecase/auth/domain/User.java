@@ -34,6 +34,14 @@ public interface User {
 
     LocalDateTime updatedAt();
 
+    boolean isAccountNonExpired();
+
+    boolean isAccountNonLocked();
+
+    boolean isCredentialsNonExpired();
+
+    boolean isEnabled();
+
     default Address getAddressPrincipal() {
         Optional<Address> optionalAddress = address()
                 .stream()

@@ -1,6 +1,6 @@
 package com.dog.web.boot.config.security;
 
-import com.dog.usecase.auth.services.FindUserByEmailUserService;
+import com.dog.usecase.auth.services.user.FindUserByEmailUserService;
 import com.dog.web.boot.config.exception.EmailException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -9,7 +9,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -24,7 +23,7 @@ public class AutheticationConfiguration {
     // TODO retornar um user UserDetails
     @Bean
     public UserDetailsService userDetailsService() {
-        return username -> (UserDetails) findUserByEmailUserService.apply(username).orElseThrow(EmailException::emailNaoEncontrado);
+        return username ->  new UserDetailsMapper(findUserByEmailUserService.apply(username).orElseThrow(EmailException::emailNaoEncontrado));
     }
 
     @Bean

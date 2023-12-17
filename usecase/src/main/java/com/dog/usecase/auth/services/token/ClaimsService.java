@@ -2,7 +2,7 @@ package com.dog.usecase.auth.services.token;
 
 import com.dog.usecase.auth.domain.Address;
 import com.dog.usecase.auth.domain.User;
-import com.dog.usecase.auth.services.FindUserByEmailUserService;
+import com.dog.usecase.auth.services.user.FindUserByEmailUserService;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collections;
@@ -39,7 +39,7 @@ public final class ClaimsService implements Function<String, Map<String, Object>
         claimsUser.put("name", user.name());
         claimsUser.put("email", user.email());
         claimsUser.put("birthDate", user.birthDate().toString());
-        claimsUser.put("urlPhoto", user.phone());
+        claimsUser.put("urlPhoto", user.urlPhoto());
         return claimsUser;
     }
 

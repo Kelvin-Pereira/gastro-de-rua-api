@@ -51,7 +51,7 @@ public record UserEntityToUserMapper(UserEntity userEntity) implements User {
 
     @Override
     public String password() {
-        return null;
+        return userEntity.getPassword();
     }
 
     @Override
@@ -72,5 +72,25 @@ public record UserEntityToUserMapper(UserEntity userEntity) implements User {
     @Override
     public LocalDateTime updatedAt() {
         return userEntity.getUpdatedAt();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return userEntity.isAccountNonExpired();
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return userEntity.isAccountNonLocked();
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return userEntity.isCredentialsNonExpired();
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return userEntity.isEnabled();
     }
 }

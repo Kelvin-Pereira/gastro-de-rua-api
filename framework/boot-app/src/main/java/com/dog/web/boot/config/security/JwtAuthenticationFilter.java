@@ -2,7 +2,7 @@ package com.dog.web.boot.config.security;
 
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.enums.PermissionEnum;
-import com.dog.usecase.auth.services.FindUserByEmailUserService;
+import com.dog.usecase.auth.services.user.FindUserByEmailUserService;
 import com.dog.usecase.auth.services.token.TokenService;
 import com.dog.web.boot.config.exception.EmailException;
 import jakarta.servlet.FilterChain;
@@ -37,7 +37,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
       @NonNull HttpServletResponse response,
       @NonNull FilterChain filterChain
   ) throws ServletException, IOException {
-    if (request.getServletPath().contains("/api/v1/auth")) {
+    if (request.getServletPath().contains("/api/v1/login")) {
       filterChain.doFilter(request, response);
       return;
     }

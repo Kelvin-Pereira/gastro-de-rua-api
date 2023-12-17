@@ -16,7 +16,7 @@ create table _user (
 alter table _user owner to username;
 -- Inserir um usuário
 INSERT INTO _user (birth_date, email, name, password, phone, role, created_at, updated_at)
-VALUES ('1990-01-01', 'johndoe@example.com', 'Usuário', '$2a$10$En0EnM/pb.X3RtjkffBV3.80L7Ojkdh9x7mNThNXSBLhmv.UTid/i', '1234567890', 'CUSTOMER', NOW(), NOW());
+VALUES ('1990-01-01', 'johndoe@example.com', 'Usuário', '$2a$10$En0EnM/pb.X3RtjkffBV3.80L7Ojkdh9x7mNThNXSBLhmv.UTid/i', '1234567890', 'CUSTOMER_CREATE,CUSTOMER_UPDATE,CUSTOMER_READ,CUSTOMER_DELETE', NOW(), NOW());
 
 create table address (
              id           bigserial not null primary key,

@@ -144,6 +144,7 @@ public class UserEntity implements UserDetails {
         return email;
     }
 
+    // TODO salvar colunas na base !?
     @Override
     public boolean isAccountNonExpired() {
         return true;

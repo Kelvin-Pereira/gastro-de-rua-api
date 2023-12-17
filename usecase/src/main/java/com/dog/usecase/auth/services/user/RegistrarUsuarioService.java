@@ -1,4 +1,4 @@
-package com.dog.usecase.auth.services;
+package com.dog.usecase.auth.services.user;
 
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.enums.Permission;

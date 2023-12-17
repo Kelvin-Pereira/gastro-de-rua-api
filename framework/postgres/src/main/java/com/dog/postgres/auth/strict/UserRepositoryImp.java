@@ -18,7 +18,7 @@ public final class UserRepositoryImp implements UserRepository {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        // TODO tratar error
+        // TODO tratar lancamento de erros
         UserEntity userEntity = userRepositoryJpa.findByEmail(email).orElseThrow();
         return Optional.of(new UserEntityToUserMapper(userEntity));
     }

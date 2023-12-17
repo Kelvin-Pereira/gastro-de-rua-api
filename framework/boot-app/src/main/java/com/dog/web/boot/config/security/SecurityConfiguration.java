@@ -26,6 +26,7 @@ public class SecurityConfiguration {
 
     private static final String[] PERMITS = {
             "/api/v1/login/registrar",
+            "/api/v1/login/autenticar",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",

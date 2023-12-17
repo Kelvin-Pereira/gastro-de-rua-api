@@ -51,6 +51,7 @@ public class AddressRegisterTypeToAddressMapper implements Address {
         return input.getState();
     }
 
+    // TODO remover regra do mapper
     @Override
     public Boolean isPrimary() {
         return true;
