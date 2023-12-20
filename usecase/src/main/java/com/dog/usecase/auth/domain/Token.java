@@ -6,9 +6,12 @@ import com.dog.usecase.auth.enums.TokenType;
 public interface Token {
 
   Long id();
-  String token();
+
+    String jwt();
   TokenType tokenType();
   boolean isRevoked();
   boolean isExpired();
+
+    Long idUser();
 
 }

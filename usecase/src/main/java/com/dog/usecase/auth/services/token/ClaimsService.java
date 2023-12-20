@@ -18,7 +18,6 @@ public final class ClaimsService implements Function<User, Map<String, Object>> 
 
         Map<String, Object> claims = new HashMap<>();
         claims.put("user", createUserClaims(user));
-        claims.put("email", user.email());
         claims.put("address", createAddressClaims(user.getAddressPrincipal()));
         claims.put("role", extractRoles(user));
 

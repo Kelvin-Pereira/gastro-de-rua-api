@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public interface TokenRepository {
 
-    // TODO implemntar
     List<Token> findAllValidTokenByUser(Long id);
 
     Optional<Token> findByToken(String token);
 
     void update(Token token);
 
+    Token save(Token token);
 }

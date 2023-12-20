@@ -27,8 +27,8 @@ public final class LogoutService implements Consumer<String> {
         }
 
         @Override
-        public String token() {
-            return byToken.token();
+        public String jwt() {
+            return byToken.jwt();
         }
 
         @Override
@@ -44,6 +44,11 @@ public final class LogoutService implements Consumer<String> {
         @Override
         public boolean isExpired() {
             return true;
+        }
+
+        @Override
+        public Long idUser() {
+            return byToken.idUser();
         }
     }
 

@@ -1,14 +1,13 @@
 package com.dog.postgres.auth.domain.entity;
 
-import com.dog.postgres.auth.domain.enums.TokenType;
+import com.dog.usecase.auth.domain.Token;
+import com.dog.usecase.auth.enums.TokenType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.io.Serializable;
 
 @Getter
 @Setter
@@ -23,11 +22,11 @@ public class TokenEntity {
   public Long id;
 
   @Size(max = 100000)
-  @Column(unique = true)
-  public String token;
+  @Column(name = "jwt", unique = true)
+  public String jwt;
 
   @Enumerated(EnumType.STRING)
-  public TokenType tokenType = TokenType.BEARER;
+  public TokenType tokenType;
 
   @Column(name = "expired")
   public boolean revoked;
@@ -37,5 +36,15 @@ public class TokenEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "user_id")
-  public UserEntity userEntity;
+  public UserEntity userEntity = new UserEntity();
+
+    public TokenEntity(Token token) {
+        this.id = token.id();
+        this.jwt = token.jwt();
+        this.tokenType = TokenType.BEARER;
+        this.revoked = token.isRevoked();
+        this.expired = token.isExpired();
+        this.userEntity.setId(token.idUser());
+    }
+
 }

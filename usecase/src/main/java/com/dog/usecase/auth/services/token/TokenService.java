@@ -14,19 +14,21 @@ public final class TokenService implements TokenRepository {
 
     @Override
     public List<Token> findAllValidTokenByUser(Long id) {
-
-        List<Token> allValidTokenByUser = tokenRepository.findAllValidTokenByUser(id);
-
-        return null;
+        return tokenRepository.findAllValidTokenByUser(id);
     }
 
     @Override
     public Optional<Token> findByToken(String token) {
-        return Optional.empty();
+        return tokenRepository.findByToken(token);
     }
 
     @Override
     public void update(Token token) {
+        tokenRepository.update(token);
+    }
 
+    @Override
+    public Token save(Token token) {
+        return tokenRepository.save(token);
     }
 }

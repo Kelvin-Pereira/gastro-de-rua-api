@@ -43,11 +43,12 @@ create table token (
     id         bigserial not null primary key,
     expired    boolean   not null,
     revoked    boolean   not null,
-    token      varchar(100000),
+    jwt varchar(100000),
     token_type varchar(255),
     user_id    bigint references _user
 );
 alter table token owner to username;
+create unique index uk_token_jwt on token (jwt);
 
 create table store (
        id             bigserial      not null primary key,
@@ -60,4 +61,3 @@ create table store (
        url_photo      varchar(255)
 );
 alter table store owner to username;
-create unique index uk_token_token on token (token);

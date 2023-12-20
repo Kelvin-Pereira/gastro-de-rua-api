@@ -1,5 +1,6 @@
-package com.dog.usecase.type.auth;
+package com.dog.web.boot.config.security;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +12,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class TokenResponseType {
 
+  @JsonProperty("access_token")
   private String accessToken;
-
+  @JsonProperty("refresh_token")
   private String refreshToken;
 
 }

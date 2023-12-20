@@ -25,8 +25,7 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
 
     private static final String[] PERMITS = {
-            "/api/v1/login/registrar",
-            "/api/v1/login/autenticar",
+            "/api/v1/login/**",
             "/v2/api-docs",
             "/v3/api-docs",
             "/v3/api-docs/**",

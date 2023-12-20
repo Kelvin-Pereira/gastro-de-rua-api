@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
@@ -37,7 +38,6 @@ public class JwtExtract {
         if (userClaimsObj instanceof Map<?, ?> userClaims) {
             return userClaims.get("email").toString();
         }
-
         throw new IllegalArgumentException("Claims 'user' is not a valid Map");
     }
 
@@ -56,7 +56,28 @@ public class JwtExtract {
     }
 
     public String generateRefreshToken(User user) {
-        return buildToken(claimsService.apply(user), refreshExpiration);
+        Map<String, Object> clamsRefreshToken = new HashMap<>();
+        clamsRefreshToken.put("email", user.email());
+        return buildRefreshToken(clamsRefreshToken, refreshExpiration);
+    }
+
+    public String extractUsernameRefreshToken(String jwt) {
+        Claims claims = extractAllClaims(jwt);
+        Object userClaimsObj = claims.get("email");
+        if (userClaimsObj instanceof String) {
+            return userClaimsObj.toString();
+        }
+        throw new IllegalArgumentException("Claims 'email' is not a valid");
+    }
+
+    private String buildRefreshToken(Map<String, Object> extraClaims, long expiration) {
+        Claims claims = Jwts.claims(extraClaims);
+        return Jwts.builder()
+                .setClaims(claims)
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + expiration))
+                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
+                .compact();
     }
 
     private String buildToken(Map<String, Object> extraClaims, long expiration) {
@@ -71,11 +92,16 @@ public class JwtExtract {
 
     public boolean isTokenValid(String jwt, User userDetails) {
         final String username = extractUsername(jwt);
-        return (username.equals(userDetails.email())) && !isTokenExpired(jwt);
+        return (username.equals(userDetails.email())) && isTokenExpired(jwt);
+    }
+
+    public boolean isTokenRefreshValid(String jwt, User userDetails) {
+        final String username = extractUsernameRefreshToken(jwt);
+        return (username.equals(userDetails.email())) && isTokenExpired(jwt);
     }
 
     private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+        return !extractExpiration(token).before(new Date());
     }
 
     private Date extractExpiration(String token) {
