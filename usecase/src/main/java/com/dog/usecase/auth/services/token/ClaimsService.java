@@ -2,6 +2,7 @@ package com.dog.usecase.auth.services.token;
 
 import com.dog.usecase.auth.domain.Address;
 import com.dog.usecase.auth.domain.User;
+import com.dog.usecase.auth.enums.PermissionEnum;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Collections;
@@ -49,7 +50,7 @@ public final class ClaimsService implements Function<User, Map<String, Object>> 
     }
 
     private String extractRoles(User user) {
-        return user.role().permissions().stream().map(Enum::name).collect(Collectors.joining(","));
+        return user.role().permissions().stream().map(PermissionEnum::getPermission).collect(Collectors.joining(","));
     }
 
 }

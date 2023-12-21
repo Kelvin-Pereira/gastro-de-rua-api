@@ -3,7 +3,7 @@ package com.dog.usecase.auth.perfil;
 import com.dog.arquitetura.brasil.Cnpj;
 import com.dog.usecase.auth.domain.User;
 
-public interface Perfil {
+public sealed interface Perfil {
 
     record Sistema() implements Perfil {
     }

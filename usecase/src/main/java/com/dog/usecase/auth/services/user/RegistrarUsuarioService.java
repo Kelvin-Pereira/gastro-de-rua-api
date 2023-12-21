@@ -32,7 +32,7 @@ public final class RegistrarUsuarioService implements Function<UserRegisterType,
     }
 
     private Permission userPermissions() {
-        return new Permission(EnumSet.of(CUSTOMER_READ, CUSTOMER_UPDATE, CUSTOMER_CREATE, CUSTOMER_DELETE));
+        return new Permission(EnumSet.of(CUSTOMER_READ, CUSTOMER_UPDATE, CUSTOMER_CREATE, CUSTOMER_DELETE, CUSTOMER_USER));
     }
 
 }
