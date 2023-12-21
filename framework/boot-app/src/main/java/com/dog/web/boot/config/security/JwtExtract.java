@@ -58,7 +58,7 @@ public class JwtExtract {
     public String generateRefreshToken(User user) {
         Map<String, Object> clamsRefreshToken = new HashMap<>();
         clamsRefreshToken.put("email", user.email());
-        return buildRefreshToken(clamsRefreshToken, refreshExpiration);
+        return buildToken(clamsRefreshToken, refreshExpiration);
     }
 
     public String extractUsernameRefreshToken(String jwt) {
@@ -68,16 +68,6 @@ public class JwtExtract {
             return userClaimsObj.toString();
         }
         throw new IllegalArgumentException("Claims 'email' is not a valid");
-    }
-
-    private String buildRefreshToken(Map<String, Object> extraClaims, long expiration) {
-        Claims claims = Jwts.claims(extraClaims);
-        return Jwts.builder()
-                .setClaims(claims)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + expiration))
-                .signWith(getSignInKey(), SignatureAlgorithm.HS256)
-                .compact();
     }
 
     private String buildToken(Map<String, Object> extraClaims, long expiration) {
