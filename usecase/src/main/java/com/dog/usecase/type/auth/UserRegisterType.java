@@ -1,5 +1,6 @@
 package com.dog.usecase.type.auth;
 
+import com.dog.usecase.type.address.AddressRegisterType;
 import lombok.Getter;
 import lombok.Setter;
 

@@ -16,6 +16,7 @@ import org.springframework.security.web.authentication.logout.LogoutHandler;
 
 import static com.dog.usecase.auth.enums.PermissionEnum.CUSTOMER_USER;
 import static org.springframework.http.HttpMethod.GET;
+import static org.springframework.http.HttpMethod.POST;
 
 @Configuration
 @EnableWebSecurity
@@ -52,6 +53,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests(auth -> auth.requestMatchers(PERMITS)
                         .permitAll()
                         .requestMatchers(GET, "/api/v1/teste/perfil").hasAuthority(CUSTOMER_USER.name())
+                        .requestMatchers(POST, "/api/v1/address").hasAuthority(CUSTOMER_USER.name())
                         .anyRequest().authenticated())
                 .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)

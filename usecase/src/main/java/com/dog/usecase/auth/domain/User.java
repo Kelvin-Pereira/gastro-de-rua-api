@@ -1,6 +1,7 @@
 package com.dog.usecase.auth.domain;
 
 
+import com.dog.usecase.address.domain.Address;
 import com.dog.usecase.auth.enums.Permission;
 
 import java.time.LocalDate;

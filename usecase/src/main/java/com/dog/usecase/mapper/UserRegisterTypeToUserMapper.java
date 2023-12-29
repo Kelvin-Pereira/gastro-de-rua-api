@@ -1,6 +1,6 @@
 package com.dog.usecase.mapper;
 
-import com.dog.usecase.auth.domain.Address;
+import com.dog.usecase.address.domain.Address;
 import com.dog.usecase.auth.domain.Token;
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.enums.Permission;
@@ -64,7 +64,7 @@ public class UserRegisterTypeToUserMapper implements User {
 
     @Override
     public List<Address> address() {
-        Address enderecosMapeados = new AddressRegisterTypeToAddressMapper(input.getAddress());
+        Address enderecosMapeados = new AddressRegisterTypeToAddressMapper(input.getAddress(), this);
         return Collections.singletonList(enderecosMapeados);
     }
 

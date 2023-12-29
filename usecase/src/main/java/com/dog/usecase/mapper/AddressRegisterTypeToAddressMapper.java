@@ -1,15 +1,15 @@
 package com.dog.usecase.mapper;
 
-import com.dog.usecase.auth.domain.Address;
-import com.dog.usecase.type.auth.AddressRegisterType;
+import com.dog.usecase.address.domain.Address;
+import com.dog.usecase.auth.domain.User;
+import com.dog.usecase.type.address.AddressRegisterType;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
+import javax.management.ConstructorParameters;
 import java.time.LocalDateTime;
 
-@RequiredArgsConstructor
-public class AddressRegisterTypeToAddressMapper implements Address {
-
-    private final AddressRegisterType input;
+public record AddressRegisterTypeToAddressMapper(AddressRegisterType input, User user) implements Address {
 
     @Override
     public Long id() {
@@ -51,10 +51,14 @@ public class AddressRegisterTypeToAddressMapper implements Address {
         return input.getState();
     }
 
-    // TODO remover regra do mapper
     @Override
     public Boolean isPrimary() {
-        return true;
+        return input.getIsPrimary();
+    }
+
+    @Override
+    public Long idUser() {
+        return user.id();
     }
 
     @Override

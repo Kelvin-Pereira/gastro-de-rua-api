@@ -16,5 +16,5 @@ public enum Permission {
     CUSTOMER_CREATE("customer:create"),
     CUSTOMER_DELETE("customer:delete");
 
-    private final String permission;
+    private final String permissions;
 }

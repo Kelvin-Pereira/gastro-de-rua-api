@@ -1,11 +1,10 @@
 package com.dog.postgres.mapper;
 
 import com.dog.postgres.auth.domain.entity.UserEntity;
-import com.dog.usecase.auth.domain.Address;
+import com.dog.usecase.address.domain.Address;
 import com.dog.usecase.auth.domain.Token;
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.enums.Permission;
-import lombok.RequiredArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

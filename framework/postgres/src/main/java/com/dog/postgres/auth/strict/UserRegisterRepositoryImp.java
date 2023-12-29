@@ -16,12 +16,8 @@ public final class UserRegisterRepositoryImp implements UserRegisterRepository {
 
     @Override
     public User register(User user) {
-
         UserEntity userEntity = new UserEntity(user);
-
         UserEntity userSaved = userRepositoryJpa.save(userEntity);
-
         return new UserEntityToUserMapper(userSaved);
-
     }
 }

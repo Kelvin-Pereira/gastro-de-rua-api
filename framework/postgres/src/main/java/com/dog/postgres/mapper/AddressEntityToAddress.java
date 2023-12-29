@@ -1,7 +1,7 @@
 package com.dog.postgres.mapper;
 
-import com.dog.postgres.auth.domain.entity.AddressEntity;
-import com.dog.usecase.auth.domain.Address;
+import com.dog.postgres.address.domain.entity.AddressEntity;
+import com.dog.usecase.address.domain.Address;
 
 import java.time.LocalDateTime;
 
@@ -49,6 +49,10 @@ public record AddressEntityToAddress(AddressEntity addressEntity) implements Add
     @Override
     public Boolean isPrimary() {
         return addressEntity.getIsPrimary();
+    }
+    @Override
+    public Long idUser() {
+        return addressEntity.getUserEntity().getId();
     }
 
     @Override

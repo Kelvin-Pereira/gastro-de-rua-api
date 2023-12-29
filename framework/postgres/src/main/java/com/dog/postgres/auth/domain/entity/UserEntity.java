@@ -1,10 +1,12 @@
 package com.dog.postgres.auth.domain.entity;
 
 
+import com.dog.postgres.address.domain.entity.AddressEntity;
 import com.dog.postgres.converter.PermissionEnumSetConverter;
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.enums.Permission;
 import com.dog.usecase.auth.enums.PermissionEnum;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -21,10 +23,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 
 @Getter
@@ -76,6 +75,7 @@ public class UserEntity implements UserDetails {
     @OneToMany(mappedBy = "userEntity")
     private List<TokenEntity> tokenEntities;
 
+    @JsonManagedReference //Infinite recursion
     @OneToMany(mappedBy = "userEntity", cascade = CascadeType.ALL)
     private List<AddressEntity> addressEntities;
 
@@ -89,6 +89,7 @@ public class UserEntity implements UserDetails {
     private LocalDateTime deletedAt;
 
     public UserEntity(User user) {
+        this.id = user.id();
         this.name = user.name();
         this.email = user.email();
         this.birthDate = user.birthDate();
@@ -124,7 +125,11 @@ public class UserEntity implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return getAuthorities(role.permissions());
+        if (this.role != null) {
+            return getAuthorities(role.permissions());
+        } else {
+            return Collections.emptyList();
+        }
     }
 
     public static List<SimpleGrantedAuthority> getAuthorities(Set<PermissionEnum> permission) {

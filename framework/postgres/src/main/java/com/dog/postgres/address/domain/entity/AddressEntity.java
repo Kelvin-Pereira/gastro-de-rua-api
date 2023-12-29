@@ -1,11 +1,12 @@
-package com.dog.postgres.auth.domain.entity;
+package com.dog.postgres.address.domain.entity;
 
-import com.dog.usecase.auth.domain.Address;
+import com.dog.postgres.auth.domain.entity.UserEntity;
+import com.dog.usecase.address.domain.Address;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 
 @Getter
@@ -46,6 +47,7 @@ public class AddressEntity {
     @Column(name = "is_primary")
     private Boolean isPrimary;
 
+    @JsonBackReference //Infinite recursion
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private UserEntity userEntity;

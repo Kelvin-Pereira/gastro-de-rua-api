@@ -1,6 +1,6 @@
 package com.dog.usecase.auth.services.token;
 
-import com.dog.usecase.auth.domain.Address;
+import com.dog.usecase.address.domain.Address;
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.enums.PermissionEnum;
 import lombok.RequiredArgsConstructor;
@@ -27,6 +27,7 @@ public final class ClaimsService implements Function<User, Map<String, Object>> 
 
     private Map<String, Object> createUserClaims(User user) {
         Map<String, Object> claimsUser = new HashMap<>();
+        claimsUser.put("id", user.id());
         claimsUser.put("name", user.name());
         claimsUser.put("email", user.email());
         claimsUser.put("birthDate", user.birthDate().toString());

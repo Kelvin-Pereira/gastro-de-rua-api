@@ -1,4 +1,4 @@
-package com.dog.usecase.type.auth;
+package com.dog.usecase.type.address;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +14,6 @@ public class AddressRegisterType {
     private String neighborhood;
     private String city;
     private String state;
+    private Boolean isPrimary;
 
 }
