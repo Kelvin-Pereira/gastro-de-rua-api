@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 import java.util.function.Consumer;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 public final class TokenRevokeAllUserService implements Consumer<User> {

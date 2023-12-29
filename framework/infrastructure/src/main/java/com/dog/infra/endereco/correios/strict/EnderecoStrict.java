@@ -1,8 +1,8 @@
 package com.dog.infra.endereco.correios.strict;
 
 
-import com.dog.arquitetura.lang.annotation.Nullable;
 import com.dog.arquitetura.brasil.Cep;
+import com.dog.arquitetura.lang.annotation.Nullable;
 import com.dog.infra.endereco.correios.Endereco;
 import com.dog.infra.endereco.ibge.Municipio;
 

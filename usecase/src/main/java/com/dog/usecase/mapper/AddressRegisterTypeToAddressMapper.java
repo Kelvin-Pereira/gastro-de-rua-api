@@ -3,10 +3,7 @@ package com.dog.usecase.mapper;
 import com.dog.usecase.address.domain.Address;
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.type.address.AddressRegisterType;
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 
-import javax.management.ConstructorParameters;
 import java.time.LocalDateTime;
 
 public record AddressRegisterTypeToAddressMapper(AddressRegisterType input, User user) implements Address {

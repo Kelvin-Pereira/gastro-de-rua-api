@@ -2,7 +2,6 @@ package com.dog.web.boot.config.security.perfil;
 
 import com.dog.arquitetura.HttpException;
 import com.dog.arquitetura.brasil.Cnpj;
-import com.dog.arquitetura.brasil.internal.CnpjFromString;
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.enums.PermissionEnum;
 import com.dog.usecase.auth.perfil.Perfil;

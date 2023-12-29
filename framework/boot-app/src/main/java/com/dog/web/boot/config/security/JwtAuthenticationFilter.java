@@ -2,8 +2,8 @@ package com.dog.web.boot.config.security;
 
 import com.dog.usecase.auth.domain.User;
 import com.dog.usecase.auth.enums.PermissionEnum;
-import com.dog.usecase.auth.services.user.FindUserByEmailUserService;
 import com.dog.usecase.auth.services.token.TokenService;
+import com.dog.usecase.auth.services.user.FindUserByEmailUserService;
 import com.dog.web.boot.config.exception.EmailException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

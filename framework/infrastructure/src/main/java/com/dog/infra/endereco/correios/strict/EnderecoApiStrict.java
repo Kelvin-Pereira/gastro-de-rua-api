@@ -3,14 +3,14 @@ package com.dog.infra.endereco.correios.strict;
 
 import com.dog.arquitetura.brasil.Cep;
 import com.dog.arquitetura.lang.annotation.Nullable;
-import com.dog.infra.endereco.ibge.Distrito;
-import com.dog.infra.endereco.ibge.DistritoSearchApi;
-import com.dog.infra.endereco.ibge.Municipio;
-import com.dog.infra.endereco.ibge.MunicipioSearchApi;
 import com.dog.infra.endereco.correios.Endereco;
 import com.dog.infra.endereco.correios.EnderecoApi;
 import com.dog.infra.endereco.correios.Logradouro;
 import com.dog.infra.endereco.correios.LogradouroSearchApi;
+import com.dog.infra.endereco.ibge.Distrito;
+import com.dog.infra.endereco.ibge.DistritoSearchApi;
+import com.dog.infra.endereco.ibge.Municipio;
+import com.dog.infra.endereco.ibge.MunicipioSearchApi;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Optional;
