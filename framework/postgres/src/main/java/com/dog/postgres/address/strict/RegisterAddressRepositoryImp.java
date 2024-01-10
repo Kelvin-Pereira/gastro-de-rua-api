@@ -27,6 +27,7 @@ public class RegisterAddressRepositoryImp implements AddressRegisterRepository {
 
         UserEntity userEntity = userRepositoryJpa.findById(address.idUser()).orElseThrow();
 
+        // TODO tratar error
         if(userEntity.getAddressEntities().size() >= LIMIT_ADDRESS){
             throw new DomainException("402");
         }

@@ -13,6 +13,9 @@ import java.util.function.BiFunction;
 @RequiredArgsConstructor
 public final class RegisterNewAddressService implements BiFunction<User, AddressRegisterType, AddressResponseType> {
 
+    // TODO regra de quantidade de endereco aqui nao na implentacao no modulo do banco
+
+
     private final AddressRegisterRepository addressRegisterRepository;
 
     @Override
