@@ -5,7 +5,8 @@ import com.dog.arquitetura.lang.annotation.Nullable;
 
 import java.util.Optional;
 
-public interface EnderecoApi extends LogradouroSearchApi {
+public interface
+EnderecoApi extends LogradouroSearchApi {
 
     Optional<Endereco> enderecoConfiavel(Cep cep,
                                          String logradouro,
